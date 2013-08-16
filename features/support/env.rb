@@ -26,6 +26,7 @@ require 'cucumber/rails'
 # 2) Set the value below to true. Beware that doing this globally is not
 # recommended as it will mask a lot of errors for you!
 #
+
 ActionController::Base.allow_rescue = false
 
 # Remove/comment out the lines below if your app doesn't have a database.
@@ -35,6 +36,16 @@ begin
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
+
+
+
+#setting default driver for capabara
+#Capybara.current_driver = :selenium  
+
+Capybara.register_driver :selenium do |app|
+   Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
